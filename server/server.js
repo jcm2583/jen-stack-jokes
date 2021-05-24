@@ -40,3 +40,21 @@ app.use(express.static('server/public'));
 app.listen(PORT, () => {
   console.log('server running on: ', PORT);
 }); // end spin up server
+
+//need to create a POST method to receive input from client side and add to jokes array
+app.post('/jokes', (req, res) => {
+//console.log to make sure it is receiving the user input
+console.log(req.body);
+//need to push the data into the array
+jokes.push(req.body);
+//check that it went into the array
+console.log(jokes);
+//send back a confirmation message
+res.sendStatus(201);
+});
+
+//need to GET the joke array to send back to the client side to be displayed on the DOM
+app.get('/jokes', (req, res) => {
+  //need to send back the array
+  res.send(jokes);
+});

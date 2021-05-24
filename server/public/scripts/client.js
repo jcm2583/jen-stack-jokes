@@ -11,8 +11,8 @@ function onReady() {
     $('#addJokeButton').on('click', addJoke)
 
 
-
-
+    //call on function to show jokes upon document loading
+    getDemJokes();
 
 
 
@@ -42,4 +42,28 @@ function addJoke () {
     }).then(response => {
         console.log(response);
     })
+    getDemJokes();
+}
+
+//need to create a GET request to recieve the stored data on the server
+function getDemJokes () {
+//need to create an AJAX request
+$.ajax({
+    url: '/jokes',
+    method: 'GET'
+}).then(response => {
+    //log the reponse to make sure it has been received
+    console.log('Display jokes', response);
+    //create a loop to loop through the array and append each joke object onto the DOM
+    for (let joke of response) {
+        //need to empty the DOM
+        // $('#outputDiv').empty();
+        //need to append items
+        $('#outputDiv').append(`<ul>
+        <li>Person: ${joke.whoseJoke}</li>
+        <li>Question: ${joke.jokeQuestion}</li>
+        <li>Zinger:${joke.punchLine}</li>
+        `)
+    }
+})
 }
