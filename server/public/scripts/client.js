@@ -27,12 +27,17 @@ const theJoker = {
 function addJoke () {
     //testing the click listener
     console.log('Jokes on Jokes');
+
     //need to capture user input and store that in an object
     theJoker.whoseJoke = $('#whoseJokeIn').val(),
     theJoker.jokeQuestion = $('#questionIn').val(),
     theJoker.punchLine = $('#punchlineIn').val(),
+
     //test that it took in the input
     console.log(theJoker);
+
+    //clear the inputs
+    $('input').val('');
 
     //need to POST the user input to the server
     $.ajax({
@@ -43,7 +48,7 @@ function addJoke () {
         console.log(response);
     })
 
-    
+    //call on function
     getDemJokes();
 }
 
@@ -56,8 +61,10 @@ $.ajax({
 }).then(response => {
     //log the reponse to make sure it has been received
     console.log('Display jokes', response);
+
     //need to empty the DOM
     $('#outputDiv').empty();
+    
     //create a loop to loop through the array and append each joke object onto the DOM
     for (let joke of response) {
         //need to append items

@@ -45,10 +45,13 @@ app.listen(PORT, () => {
 app.post('/jokes', (req, res) => {
 //console.log to make sure it is receiving the user input
   console.log(req.body);
+
 //need to push the data into the jokes array
   jokes.push(req.body);
+
 //check that it went into the array
   console.log(jokes);
+  
 //send back a confirmation message that data has been received
   res.sendStatus(201);
 });
