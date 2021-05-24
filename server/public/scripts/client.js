@@ -27,7 +27,7 @@ const theJoker = {
 function addJoke () {
     //testing the click listener
     console.log('Jokes on Jokes');
-    //need to take in user input
+    //need to capture user input and store that in an object
     theJoker.whoseJoke = $('#whoseJokeIn').val(),
     theJoker.jokeQuestion = $('#questionIn').val(),
     theJoker.punchLine = $('#punchlineIn').val(),
@@ -42,6 +42,8 @@ function addJoke () {
     }).then(response => {
         console.log(response);
     })
+
+    
     getDemJokes();
 }
 
@@ -54,15 +56,16 @@ $.ajax({
 }).then(response => {
     //log the reponse to make sure it has been received
     console.log('Display jokes', response);
+    //need to empty the DOM
+    $('#outputDiv').empty();
     //create a loop to loop through the array and append each joke object onto the DOM
     for (let joke of response) {
-        //need to empty the DOM
-        // $('#outputDiv').empty();
         //need to append items
         $('#outputDiv').append(`<ul>
         <li>Person: ${joke.whoseJoke}</li>
         <li>Question: ${joke.jokeQuestion}</li>
-        <li>Zinger:${joke.punchLine}</li>
+        <li>Punchline: ${joke.punchLine}</li>
+        <ul>
         `)
     }
 })
